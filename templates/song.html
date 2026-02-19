@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %} {{song.name}} - {{song.artist}} {% endblock %}
+
+
+{% block content %}
+<a class="btn btn-outline-nude" href="{{url_for('home')}}">&lt;</a>
+<div id="original-img">
+    <p class="result-text">Imagem original:</p>
+    <img class="original-img" width="400" src="{{original_img}}" alt="Imagem original.">
+</div>
+<br>
+<div id="song-result">
+    <p class="result-text">Música recomendada:</p>
+
+    <iframe title="deezer-widget" src="https://widget.deezer.com/widget/auto/track/{{song.id}}" width="400" height="400"
+        frameborder="0" allowtransparency="true" allow="encrypted-media; clipboard-write"></iframe>
+</div>
+
+{% endblock %}

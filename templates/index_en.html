@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %} LensCore {% endblock %}
+
+{% block content %}
+<div class="title-content">
+    <a class="change_language" href="{{url_for('home')}}">Português</a>
+    <h1 id="title">Welcome to LensCore!</h1>
+    <h2 id="subtitle">Get music recommendations based on images.</h2>
+
+</div>
+
+<div class="form-content">
+    {% with errors = get_flashed_messages() %}
+    {% if errors %}
+    {% for error in errors %}
+    <p class="error">{{ error }}</p>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="form-field">
+
+        <form id="image-form" method="post" enctype="multipart/form-data" action="{{url_for('song_recommendation')}}">
+            {{ form.hidden_tag() }}
+
+            <div id="drop-area">
+                <p>Drag and drop or click to select image.</p>
+                {{ form.img_file(id="file-input", style="display:none", accept="image/*") }}
+
+                <div id="gallery"></div>
+            </div>
+            {{form.submit(id="submit-btn", class="btn btn-outline-nude btn-lg", value="Submit")}}
+        </form>
+    </div>
+    <p class="remark">This is a simple project intended to be fun; the results may not be accurate.</p>
+</div>
+{% endblock %}
+
+{% block body%}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/drag-drop.js') }}"></script>
+
+{% endblock %}
