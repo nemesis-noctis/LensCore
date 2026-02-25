@@ -88,6 +88,8 @@ def song_recommendation():
     
     if form.validate_on_submit():
         images_path = "./static/temp_img/"
+        if not os.path.exists(images_path):
+            os.makedirs(images_path)
         lang = form.lang.data
         accepted_langs = ["en", "pt"]
         if lang not in accepted_langs:
